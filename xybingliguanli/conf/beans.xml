@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 数据源配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+	</bean>
+
+	<!-- 配置 sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 加载 sqlMapConfig.xml -->
+		<property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
+	</bean>
+
+	<!-- 配置 AdminDao -->
+	<bean id="adminDao" class="com.dao.AdminDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置BumenDao -->
+	<bean id="bumenDao" class="com.dao.BumenDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 GgtypeDao -->
+	<bean id="ggtypeDao" class="com.dao.GgtypeDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 GonggaoDao -->
+	<bean id="gonggaoDao" class="com.dao.GonggaoDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 RizhiDao -->
+	<bean id="rizhiDao" class="com.dao.RizhiDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 RoleDao -->
+	<bean id="roleDao" class="com.dao.RoleDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 ShangpinDao -->
+	<bean id="shangpinDao" class="com.dao.ShangpinDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 SpcangkuDao -->
+	<bean id="spcangkuDao" class="com.dao.SpcangkuDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 SpchuDao -->
+	<bean id="spchuDao" class="com.dao.SpchuDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 SpgysDao -->
+	<bean id="spgysDao" class="com.dao.SpgysDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 SpjinDao -->
+	<bean id="spjinDao" class="com.dao.SpjinDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 SptypeDao -->
+	<bean id="sptypeDao" class="com.dao.SptypeDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 UserDao -->
+	<bean id="userDao" class="com.dao.UserDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 UtaolunDao -->
+	<bean id="utaolunDao" class="com.dao.UtaolunDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 UxinxiDao -->
+	<bean id="uxinxiDao" class="com.dao.UxinxiDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 UxtypeDao -->
+	<bean id="uxtypeDao" class="com.dao.UxtypeDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 UyijianDao -->
+	<bean id="uyijianDao" class="com.dao.UyijianDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 UzhanneiDao -->
+	<bean id="uzhanneiDao" class="com.dao.UzhanneiDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 YhbumenDao -->
+	<bean id="yhbumenDao" class="com.dao.YhbumenDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 YhroleDao -->
+	<bean id="yhroleDao" class="com.dao.YhroleDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 YonghuDao -->
+	<bean id="yonghuDao" class="com.dao.YonghuDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 YxinxiDao -->
+	<bean id="yxinxiDao" class="com.dao.YxinxiDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 配置 YxtypeDao -->
+	<bean id="yxtypeDao" class="com.dao.YxtypeDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 通过mapper扫描的方式 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 注意使用 sqlSessionFactoryBeanName 和 value -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<property name="basePackage" value="com.mapper"></property>
+	</bean>
+
+	<!-- 设置上传文件最大值 1M=1*1024*1024(B)=1048576 bytes -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+        <!-- 设置默认编码 -->  
+        <property name="defaultEncoding" value="utf-8"></property>  
+        <!-- 上传最大大小5M-->   
+        <property name="maxUploadSize" value="5242440"></property>    
+	</bean>
+	
+	<!-- 事物管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 事务注解驱动，标注@Transactional的类和方法将具有事务性 -->  
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>
